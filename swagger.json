@@ -57,7 +57,7 @@
             "description": "Retorna o objeto criado"
           },
           "400": {
-            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+            "description": "Retorna o erro que gerou o status"
           },
           "401": {
             "description": "Não há retorno, apenas indicativo do status de não autorizado"
@@ -140,7 +140,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Não há retorno, apenas status"
+            "description": "Retorna o erro que gerou o status"
           },
           "401": {
             "description": "Não há retorno, apenas status"
@@ -202,7 +202,7 @@
             "description": "Retorna o objeto criado"
           },
           "400": {
-            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+            "description": "Retorna o erro que gerou o status"
           },
           "401": {
             "description": "Não há retorno, apenas indicativo do status de não autorizado"
@@ -237,7 +237,7 @@
             "description": "Retorna o token de acesso para as demais rotas"
           },
           "400": {
-            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+            "description": "Retorna o erro que gerou o status"
           },
           "401": {
             "description": "Não há retorno, apenas indicativo do status de não autorizado"
