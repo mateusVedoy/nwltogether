@@ -51,3 +51,5 @@ Nesta edição do evento, o projeto se pauta na valorização das pessoas e por 
 - Express
 - JWT
 - Bcryptjs
+
+### ** Para acessar a documentação do projeto, acesse localhost:3000/doc
