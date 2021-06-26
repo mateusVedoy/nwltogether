@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Esta breve documentação expõe as principais informações documentais da API desenvolvida na semana NLW TOGETHER da RocketSeat na trilha de NodeJS",
+    "version": "1.0.0",
+    "title": "NLW Valoriza API",
+    "contact": {
+      "email": "email@email.com"
+    }
+  },
+  "host": "127.0.0.1:3000",
+  "tags": [
+    {
+      "name": "compliments",
+      "description": "Elogios para os usuários cadastrados"
+    },
+    {
+      "name": "tags",
+      "description": "Tags que servirão de categorização dos elogios"
+    },
+    {
+      "name": "users",
+      "description": "Usuários do sistema"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/compliments": {
+      "post": {
+        "tags": [
+          "compliments"
+        ],
+        "summary": "",
+        "description": "Cria um elogio baseando-se em tags previamente cadatradas. Precisa estar autenticado para poder criar elogio",
+        "operationId": "addCompliment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Propriedades a serem passadas ao criar um elogio",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCompliment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o objeto criado"
+          },
+          "400": {
+            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+          },
+          "401": {
+            "description": "Não há retorno, apenas indicativo do status de não autorizado"
+          }
+        }
+      }
+    },
+    "compliments/receivedByUser":{
+      "get": {
+        "tags": [
+          "compliments"
+        ],
+        "summary": "",
+        "description": "Carrega todos os elogios vinculados ao usuário logado no sistema passando como parâmetro o seu id no payload do token",
+        "operationId": "getAllComplimentsByReceiver",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "400": {
+            "description": "Não há retorno, apenas status"
+          },
+          "401": {
+            "description": "Não há retorno, apenas status"
+          },
+          "200": {
+            "description": "Retorna a relação de dados"
+          }
+        }
+      }
+    },
+    "compliments/sentByUser": {
+      "get": {
+        "tags": [
+          "compliments"
+        ],
+        "summary": "",
+        "description": "Retorna a relação de elogios vinculados ao usuário logado no sistema passando como parâmetro o seu id no payload do token",
+        "operationId": "getAllComplimentsBySender",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "400": {
+            "description": "Não há retorno, apenas status"
+          },
+          "401": {
+            "description": "Não há retorno, apenas status"
+          },
+          "200": {
+            "description": "Retorna a relação de dados"
+          }
+        }
+      }
+    },
+    "/tags/create": {
+      "post": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "",
+        "description": "Cadastra tags no sistema, porém, apenas usuários administradores que estejam autenticados podem cadastrar novas tags",
+        "operationId": "createTags",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Tags a serem cadastradas no sistema",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddTags"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Não há retorno, apenas status"
+          },
+          "401": {
+            "description": "Não há retorno, apenas status"
+          },
+          "200": {
+            "description": "Retorna a relação de dados"
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "",
+        "description": "Retorna a relação de tags cadastradas no sistema e apenas usuários logados podem requisitar a rota",
+        "operationId": "getTags",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o objeto cadastrado"
+          },
+          "400": {
+            "description": "Retorna status de errr"
+          },
+          "401": {
+            "description": "Retorna status de não autorizado"
+          }
+        }
+      }
+    },
+    "/users/create": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "description": "Adiciona um novo usuário no sistema",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o objeto criado"
+          },
+          "400": {
+            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+          },
+          "401": {
+            "description": "Não há retorno, apenas indicativo do status de não autorizado"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "description": "",
+        "operationId": "userLogin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o token de acesso para as demais rotas"
+          },
+          "400": {
+            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+          },
+          "401": {
+            "description": "Não há retorno, apenas indicativo do status de não autorizado"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "description": "Retorna todos usuários cadastrados no sistema e acessível somente para usuários autenticados",
+        "operationId": "getAllUsers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o objeto criado"
+          },
+          "400": {
+            "description": "Não há retorno, apenas indicativo do status de requisição incorreta"
+          },
+          "401": {
+            "description": "Não há retorno, apenas indicativo do status de não autorizado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddUser": {
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "admin",
+        "password"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Mateus Vedoy"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@email.com"
+        },
+        "admin": {
+          "type": "boolean",
+          "example": true
+        },
+        "password": {
+          "type": "string",
+          "example": "ri3905u3093f063863673fm6872f3m062m2682f-m96m826"
+        }
+      }
+    },
+    "LoginUser": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "ri3905u3093f063863673fm6872f3m062m2682f-m96m826"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Tag"
+      }
+    },
+    "AddCompliment": {
+      "type": "object",
+      "required": [
+        "tag_id",
+        "user_receiver",
+        "message"
+      ],
+      "properties": {
+        "tag_id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "56bb0460-856e-4ae3-b32f-f4507628e9e4"
+        },
+        "user_receiver": {
+          "type": "string",
+          "example": "91cd685f-eb60-45b3-a198-e7c32df1fefe"
+        },
+        "message": {
+          "type": "string",
+          "example": "Você é uma pessoa muito empenhada em seus objetivos"
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "AddTags": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Perseverança"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
